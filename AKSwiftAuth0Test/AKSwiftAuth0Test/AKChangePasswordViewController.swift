@@ -28,20 +28,18 @@ class AKChangePasswordViewController: UIViewController {
             self.showMessage("Please eneter an email", dismissVC: false)
             return;
         }
-        let failure = { (error: NSError) in
-            print("Oops something went wrong: \(error)")
-        }
         
-        let client = A0Lock.sharedLock().apiClient()
         let params = A0AuthParameters.newDefaultParams()
         params[A0ParameterConnection] = kAuth0ConnectionType; // Or your configured DB connection
         
         //Request a change password for the given user. Auth0 will send an email with a link to input a new password.
         //You can change password ONLY for Auth0 database connections
-        client.requestChangePasswordForUsername(self.emailTextField.text!,
+        lock.apiClient().requestChangePasswordForUsername(self.emailTextField.text!,
                                                 parameters: params, success: { () -> Void in
-                                                    self.showMessage("We have just sent you an email.to reset your password", dismissVC: true)
-            }, failure: failure)
+                                                    self.showMessage("We have just sent you an email to reset your password", dismissVC: true)
+                                                }, failure: {(error: NSError) in
+                                                    print("Oops something went wrong: \(error)")}
+        )
 
     }
     

@@ -39,7 +39,7 @@
     [client requestChangePasswordForUsername:self.emailTextField.text
                                   parameters:params
                                      success:^{
-                                         [self showMessage:@"We have just sent you an email.to reset your password" dismissVC:YES];                                         
+                                         [self showMessage:@"We have just sent you an email to reset your password" dismissVC:YES];                                         
                                      } failure:^(NSError * _Nonnull error) {
                                          [self showMessage:[NSString stringWithFormat:@"%@", error] dismissVC:NO];
                                      }];
