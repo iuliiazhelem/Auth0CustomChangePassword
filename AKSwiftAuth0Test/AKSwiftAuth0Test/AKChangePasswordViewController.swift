@@ -36,6 +36,7 @@ class AKChangePasswordViewController: UIViewController {
         let params = A0AuthParameters.newDefaultParams()
         params[A0ParameterConnection] = kAuth0ConnectionType; // Or your configured DB connection
         
+        //Request a change password for the given user. Auth0 will send an email with a link to input a new password.
         //You can change password ONLY for Auth0 database connections
         client.requestChangePasswordForUsername(self.emailTextField.text!,
                                                 parameters: params, success: { () -> Void in
