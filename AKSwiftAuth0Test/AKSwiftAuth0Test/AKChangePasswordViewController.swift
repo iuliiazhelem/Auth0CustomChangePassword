@@ -2,9 +2,6 @@
 //  AKChangePasswordViewController.swift
 //  AKSwiftAuth0Test
 //
-//  Created by Iuliia Zhelem on 11.07.16.
-//  Copyright © 2016 Akvelon. All rights reserved.
-//
 
 import UIKit
 import Lock
@@ -12,6 +9,7 @@ import Lock
 let kAuth0ConnectionType = "Username-Password-Authentication"
 
 class AKChangePasswordViewController: UIViewController {
+    var delegate:LoginViewControllerDelegate! = nil
     var email:String?
     var lock: A0Lock!
 
@@ -27,7 +25,7 @@ class AKChangePasswordViewController: UIViewController {
     
     @IBAction func clickChangePasswordButton(sender: AnyObject) {
         if (self.emailTextField.text?.characters.count < 1) {
-            self.showMessage("You need to eneter email", dismissVC: false)
+            self.showMessage("Please eneter an email", dismissVC: false)
             return;
         }
         let failure = { (error: NSError) in
@@ -38,10 +36,10 @@ class AKChangePasswordViewController: UIViewController {
         let params = A0AuthParameters.newDefaultParams()
         params[A0ParameterConnection] = kAuth0ConnectionType; // Or your configured DB connection
         
+        //You can change password ONLY for Auth0 database connections
         client.requestChangePasswordForUsername(self.emailTextField.text!,
                                                 parameters: params, success: { () -> Void in
-                                                    print("success reset passwd")
-                                                    self.showMessage("Awesome! Please Check your email.", dismissVC: true)
+                                                    self.showMessage("We have just sent you an email.to reset your password", dismissVC: true)
             }, failure: failure)
 
     }
@@ -55,11 +53,11 @@ class AKChangePasswordViewController: UIViewController {
             let alert = UIAlertController(title: "Auth0", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) -> Void in
                 if dismissVC {
+                    self.delegate.changedEmail(self.emailTextField.text!)
                     self.dismissViewControllerAnimated(false, completion: nil)
                 }
             }))
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
-
 }

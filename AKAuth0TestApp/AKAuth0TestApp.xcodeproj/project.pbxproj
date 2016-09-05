@@ -65,13 +65,13 @@
 				22C3985A1D310D43006B40E2 /* AppDelegate.m */,
 				22C3985C1D310D43006B40E2 /* ViewController.h */,
 				22C3985D1D310D43006B40E2 /* ViewController.m */,
+				220CE7C91D33DC170079AA72 /* AKChangePasswordViewController.h */,
+				220CE7CA1D33DC170079AA72 /* AKChangePasswordViewController.m */,
 				22C3985F1D310D43006B40E2 /* Main.storyboard */,
 				22C398621D310D43006B40E2 /* Assets.xcassets */,
 				22C398641D310D43006B40E2 /* LaunchScreen.storyboard */,
 				22C398671D310D43006B40E2 /* Info.plist */,
 				22C398561D310D43006B40E2 /* Supporting Files */,
-				220CE7C91D33DC170079AA72 /* AKChangePasswordViewController.h */,
-				220CE7CA1D33DC170079AA72 /* AKChangePasswordViewController.m */,
 			);
 			path = AKAuth0TestApp;
 			sourceTree = "<group>";
@@ -273,7 +273,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AKAuth0TestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.akvelon.AKAuth0TestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.auth0.AKAuth0TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -284,7 +284,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AKAuth0TestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.akvelon.AKAuth0TestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.auth0.AKAuth0TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

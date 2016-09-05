@@ -2,14 +2,9 @@
 //  AKChangePasswordViewController.m
 //  AKAuth0TestApp
 //
-//  Created by Iuliia Zhelem on 11.07.16.
-//  Copyright © 2016 Akvelon. All rights reserved.
-//
 
 #import "AKChangePasswordViewController.h"
 #import <Lock/Lock.h>
-
-static NSString *kAuth0ConnectionType = @"Username-Password-Authentication";
 
 @interface AKChangePasswordViewController ()
 
@@ -31,7 +26,7 @@ static NSString *kAuth0ConnectionType = @"Username-Password-Authentication";
 
 - (IBAction)clickChangePasswordButton:(id)sender {
     if (self.emailTextField.text.length < 1) {
-        [self showMessage:@"You need to eneter email" dismissVC:NO];
+        [self showMessage:@"Please eneter email" dismissVC:NO];
         return;
     }
     
@@ -39,12 +34,11 @@ static NSString *kAuth0ConnectionType = @"Username-Password-Authentication";
     A0AuthParameters *params = [A0AuthParameters newDefaultParams];
     params[A0ParameterConnection] = kAuth0ConnectionType; // Or your configured DB connection
     
+    //You can change password ONLY for Auth0 database connections
     [client requestChangePasswordForUsername:self.emailTextField.text
                                   parameters:params
                                      success:^{
-                                         NSLog(@"Please check your email!");
-                                         [self showMessage:@"Please check your email!" dismissVC:YES];
-                                         
+                                         [self showMessage:@"We have just sent you an email.to reset your password" dismissVC:YES];                                         
                                      } failure:^(NSError * _Nonnull error) {
                                          [self showMessage:[NSString stringWithFormat:@"%@", error] dismissVC:NO];
                                      }];
@@ -64,6 +58,7 @@ static NSString *kAuth0ConnectionType = @"Username-Password-Authentication";
         UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if (dismissVC){
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.delegate changedEmail:weakSelf.emailTextField.text];
                     [weakSelf dismissViewControllerAnimated:NO completion:nil];
                 });
             }

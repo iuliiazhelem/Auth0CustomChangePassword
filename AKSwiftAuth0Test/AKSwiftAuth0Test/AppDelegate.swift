@@ -2,9 +2,6 @@
 //  AppDelegate.swift
 //  AKSwiftAuth0Test
 //
-//  Created by Iuliia Zhelem on 08.07.16.
-//  Copyright © 2016 Akvelon. All rights reserved.
-//
 
 import UIKit
 import Lock
@@ -17,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         A0Lock.sharedLock().applicationLaunchedWithOptions(launchOptions)
+        
+        //Add logging
         A0LockLogger.logAll()
 
         return true
@@ -47,6 +46,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return A0Lock.sharedLock().handleURL(url, sourceApplication: sourceApplication)
     }
-
 }
 
